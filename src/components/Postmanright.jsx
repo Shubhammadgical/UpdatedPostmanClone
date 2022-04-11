@@ -190,8 +190,8 @@ class Postmanright extends Component{
                         </div>
                         <div className="tab-pane fade " id="response-headers"
                             role="tabpanel" aria-labelledby="response-headers-tab">
-                            <div className="overflow-auto"
-                                    style={{height:200}}>
+                            <div className="overflow-auto">
+                                        <div className="responsiveheaderdiv">
                                         {headers? <div>
                                         <div className="row ">
                                             <div className="col-6 border p-2" >
@@ -210,7 +210,7 @@ class Postmanright extends Component{
                                             </div>
                                         </div></div>
                                         : ""}
-                                        
+                                        </div>
                             </div>
                         </div>
                     </div>
