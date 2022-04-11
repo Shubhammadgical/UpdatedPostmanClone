@@ -43,6 +43,7 @@ class Postmanright extends Component{
             }catch(e){
                 s1.alldata="Please check the JSON format that you want to POST";
                 s1.status="";
+                s1.headers="";
             }
         }else{
             AllData={url:s1.data.url,method:s1.data.method};
@@ -59,32 +60,6 @@ class Postmanright extends Component{
             }
         }
         this.setState(s1)
-        /*if(s1.data.method==="GET"){
-            try{
-                response=await http.get(`${s1.data.url}`);
-                console.log(response.data)
-                s1.alldata=response.data;
-                s1.status=response.status;
-                s1.statustext=response.statusText;
-            }catch{
-                s1.alldata="Error in fetching Data. URL not found or check internet connection";
-                s1.status="";
-                s1.statustext="";
-            }
-        }else if(s1.data.method=="POST"){
-            try{
-                let post=JSON.parse(s1.data.postjson);
-                console.log(post)
-                response =await http.post(`${s1.data.url}`,post);
-                console.log(response)
-                s1.alldata=response.data;
-            }catch{
-                s1.alldata="Error in posting Data. URL not found or check internet connection";
-                s1.status="";
-                s1.statustext="";
-            }
-        }*/
-        
     }
     handlesendbtn=()=>{
         let s1={...this.state};
