@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Postman from './components/Postman';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Newpostman from './components/Newpostman';
 
 ReactDOM.render(
   <React.StrictMode>
