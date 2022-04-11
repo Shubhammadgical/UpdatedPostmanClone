@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const baseURL = "http://localhost:2410";
+const baseURL = "https://ancient-plateau-49936.herokuapp.com";
 
 function get( url){
-    return axios.get( url);
+    return axios.get(baseURL + url);
 }
 
 function post(url,obj){
