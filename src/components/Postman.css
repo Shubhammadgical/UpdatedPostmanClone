@@ -93,6 +93,7 @@
 }
 .responsiveheaderdiv{
     height:200px;
+    min-width:1055px;
 }
 
 
@@ -145,7 +146,7 @@
     flex-direction: column;
 }
 .__json-pretty-error__{
-    height: 210px;
+    height: 200px;
     width: 1050px;
 }
 .__json-pretty__{
