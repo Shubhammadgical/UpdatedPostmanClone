@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from "react-bootstrap";
 import Postmanleft from "./Postmanleft";
 import Postmanright from "./Postmanright";
 import {FaUserPlus,FaRegSun} from 'react-icons/fa';
@@ -11,13 +10,15 @@ class Postman extends Component{
         history:[],
         bgstyle:"",
         highlight:"",
+        alldata:"",
+        headers:""
     }
     senddata=(data)=>{
         let s1={...this.state};
         let data1={url:data.url,method:data.method};
         s1.highlight="true";
         console.log(s1.highlight)
-        s1.history.push(data1);
+        s1.history.unshift(data1);
         this.setState(s1);
     }
     handlehistoryclick=(data)=>{
@@ -26,6 +27,8 @@ class Postman extends Component{
         s1.data.method=data.method;
         s1.postjson=data.postjson;
         s1.highlight="false";
+        s1.alldata="";
+        s1.headers="";
         console.log(s1.highlight)
         this.setState(s1);
     }
@@ -34,8 +37,14 @@ class Postman extends Component{
         s1.data.url=newdata.url;
         this.setState(s1);
     }
+    handleresponsedata=(data,headers)=>{
+        let s1={...this.state};
+        s1.alldata=data;
+        s1.headers=headers;
+        this.setState(s1);
+    }
     render(){
-        let {history,data,bgstyle,highlight}=this.state;
+        let {history,data,bgstyle,highlight,alldata,headers}=this.state;
         return(
             <div>
                 <div className="headerdiv">
@@ -70,13 +79,12 @@ class Postman extends Component{
                     </div>
                 </div>
 
-                
                 <div className="data">
                     <div className="left">
                         <Postmanleft history={history} onSend={this.handlehistoryclick} bgstyle={bgstyle} highlight={highlight}/>
                     </div>
                     <div className="right">
-                        <Postmanright onSend={this.senddata} ChangeData={this.changedata} data={data} highlight={highlight}/>
+                        <Postmanright onSend={this.senddata} ChangeData={this.changedata} OnSend={this.handleresponsedata} data={data} highlight={highlight} alldata={alldata} headers={headers}/>
                     </div>
                 </div>
             </div>

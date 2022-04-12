@@ -10,8 +10,8 @@ import { BiMessageDetail, BiPencil } from "react-icons/bi";
 class Postmanright extends Component{
     state={
         data:this.props.data,
-        alldata:[],
-        headers:"",
+        alldata:this.props.alldata,
+        headers:this.props.headers,
         status:"",
         statustext:"",
     }
@@ -59,7 +59,8 @@ class Postmanright extends Component{
                 s1.status="NOT FOUND"
             }
         }
-        this.setState(s1)
+        this.setState(s1);
+        this.props.OnSend(s1.alldata,s1.headers);
     }
     handlesendbtn=()=>{
         let s1={...this.state};
@@ -67,12 +68,16 @@ class Postmanright extends Component{
             s1.data.method="GET"
         }
         this.setState(s1);
-        this.props.onSend(s1.data);
         this.fetchdata();
+        this.props.onSend(s1.data);
     }
     render(){
         let {url,method,postjson}=this.state.data;
         let {alldata,status,headers}=this.state;
+        // console.log(this.props.alldata);
+        // console.log(alldata)
+        console.log(this.props.headers);
+        console.log(headers)
         return(
             <div className="fullrightpannel">
             <div className="rightpannel">
@@ -129,7 +134,7 @@ class Postmanright extends Component{
                     <div className="tab-content p-3 border-top-0 border">
                         <div className="tab-pane fade show active" id="query-params"
                             role="tabpanel" aria-labelledby="query-params-tab">
-                                <div data-query-params style={{height:165}}>
+                                <div data-query-params className="querydiv">
                                     <div className="input-group">
                                     <input className="form-control" type="text" placeholder="Key"></input>
                                     <input className="form-control" type="text" placeholder="Value"></input>
@@ -141,7 +146,7 @@ class Postmanright extends Component{
                         </div>
                         <div className="tab-pane fade " id="request-headers"
                             role="tabpanel" aria-labelledby="request-headers-tab">
-                                <div data-request-headers style={{height:165}}>
+                                <div data-request-headers className="queryheaderdiv">
                                 <div className="input-group">
                                     <input className="form-control" type="text" placeholder="Key"></input>
                                     <input className="form-control" type="text" placeholder="Value"></input>
@@ -153,7 +158,7 @@ class Postmanright extends Component{
                         </div>
                         <div className="tab-pane " id="json"
                             role="tabpanel" aria-labelledby="json-tab">
-                                <div style={{height:165}}>
+                                <div className="jsondiv">
                                 <textarea name="postjson" value={postjson} onChange={this.handlechange}>
                                 </textarea>
                                 </div>
@@ -184,7 +189,7 @@ class Postmanright extends Component{
                             role="tabpanel" aria-labelledby="body-tab">
                                 <div className="rightscrollerbody">
                                     <div className="rightscroller">
-                                        <JSONPretty data={alldata} />
+                                        <JSONPretty data={this.props.alldata} />
                                     </div>
                                 </div>
                         </div>
@@ -192,7 +197,7 @@ class Postmanright extends Component{
                             role="tabpanel" aria-labelledby="response-headers-tab">
                             <div className="overflow-auto">
                                         <div className="responsiveheaderdiv">
-                                        {headers? <div>
+                                        {this.props.headers? <div>
                                         <div className="row ">
                                             <div className="col-6 border p-2" >
                                                 Content-Length 

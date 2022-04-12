@@ -146,7 +146,7 @@
     flex-direction: column;
 }
 .__json-pretty-error__{
-    height: 200px;
+    height: 180px;
     width: 1050px;
 }
 .__json-pretty__{
@@ -223,13 +223,15 @@
 .leftoptions{
     width: 90px;
     height: 100%;
-    border:1px solid lightgray;
     font-size: 11px;
-    text-align: center;
 }
 .leftoptions div{
-    height: 70px;
-    padding: 10px;
+    height: 109px;
+    padding-top: 32px;
+    text-align: center;
+    align-items: center;
+    border-bottom:0.1px solid lightgray;
+    border-right:0.1px solid lightgray;
 }
 .historypannel input{
     height: 25px;
@@ -280,23 +282,45 @@
 .historydiv{
     display: inline-flex;
 }
+
+.querydiv{
+    height:165px;
+}
+.queryheaderdiv{
+    height:165px;
+}
+.jsondiv{
+    height:165px;
+}
+
 @media only screen and (max-width: 1261px) {
     .data{
         width: 1250px;
     }
 }
 @media only screen and (min-height: 1333px) {
-    .responsiveheaderdiv{
-        height:240px;
-    }
-    .rightscrollerbody{
-        height: 240px;
-    }
     .leftpannel{
         height: 650px;
     }
+    .querydiv{
+        height:205px;
+    }
+    .queryheaderdiv{
+        height:205px;
+    }
+    .jsondiv{
+        height:205px;
+    }
+    .bodydata textarea{
+        min-height: 200px;
+        max-height: 200px;
+    }
+    .leftoptions div{
+        height: 115px;
+        padding-top: 35px;
+    }
     .__json-pretty-error__{
-        height: 250px;
+        height: 180px;
         width: 1070px;
     }
     .__json-pretty__{
