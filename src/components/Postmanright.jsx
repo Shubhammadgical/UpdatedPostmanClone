@@ -41,9 +41,10 @@ class Postmanright extends Component{
                     s1.status="NOT FOUND"
                 }
             }catch(e){
-                s1.alldata="Please check the JSON format that you want to POST";
+                s1.alldata="";
                 s1.status="";
                 s1.headers="";
+                alert("Please check JSON format which you want to post.")
             }
         }else{
             AllData={url:s1.data.url,method:s1.data.method};
@@ -60,7 +61,7 @@ class Postmanright extends Component{
             }
         }
         this.setState(s1);
-        this.props.OnSend(s1.alldata,s1.headers);
+        this.props.OnSend(s1.alldata,s1.headers,s1.data);
     }
     handlesendbtn=()=>{
         let s1={...this.state};
@@ -170,7 +171,7 @@ class Postmanright extends Component{
                     <div className="responsebody px-2">
                     <div className="row">
                         <div className="col-6"><h3>Response</h3></div> 
-                        <div className="col-6" style={{marginTop:20}}>Status : {status}</div>
+                        <div className="col-6" style={{marginTop:20}}>Status : {this.props.alldata ? status : ""}</div>
                     </div>
                     <ul className="nav nav-tabs" role="tablist">
                         <li className="nav-item" role="presentation">
@@ -189,7 +190,7 @@ class Postmanright extends Component{
                             role="tabpanel" aria-labelledby="body-tab">
                                 <div className="rightscrollerbody">
                                     <div className="rightscroller">
-                                        <JSONPretty data={this.props.alldata} />
+                                        <JSONPretty data={alldata==""?  alldata : this.props.alldata} />
                                     </div>
                                 </div>
                         </div>
@@ -197,7 +198,7 @@ class Postmanright extends Component{
                             role="tabpanel" aria-labelledby="response-headers-tab">
                             <div className="overflow-auto">
                                         <div className="responsiveheaderdiv">
-                                        {this.props.headers? <div>
+                                        {this.props.headers && headers ? <div>
                                         <div className="row ">
                                             <div className="col-6 border p-2" >
                                                 Content-Length 

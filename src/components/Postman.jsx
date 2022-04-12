@@ -28,6 +28,7 @@ class Postman extends Component{
         s1.postjson=data.postjson;
         s1.highlight="false";
         s1.alldata="";
+        s1.data.postjson="";
         s1.headers="";
         console.log(s1.highlight)
         this.setState(s1);
@@ -37,14 +38,17 @@ class Postman extends Component{
         s1.data.url=newdata.url;
         this.setState(s1);
     }
-    handleresponsedata=(data,headers)=>{
+    handleresponsedata=(data,headers,json)=>{
         let s1={...this.state};
         s1.alldata=data;
         s1.headers=headers;
+        console.log(json)
+        s1.data.postjson=json.postjson;
         this.setState(s1);
     }
     render(){
         let {history,data,bgstyle,highlight,alldata,headers}=this.state;
+        console.log(data.postjson)
         return(
             <div>
                 <div className="headerdiv">
