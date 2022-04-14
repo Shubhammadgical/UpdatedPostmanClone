@@ -22,18 +22,12 @@ let {questions}=require("./data.js");
 let axios = require("axios");
 
 app.get("/alldata",function(req,res){
-    try{
-        res.send(questions)
-        console.log(questions)
-    }catch(error){
-        if(error.response){
-            console.log(error.response);
-            res.send(error)
-        }else{
-            res.send(error);
-            console.log(error)
-        }
-    }
+    let answer=req.query.answer;
+    console.log(answer);
+    let arr1=questions;
+    if(answer) arr1 =questions.filter(qu=> qu.answer=== +answer);
+    res.send(arr1)
+    console.log(arr1)
 })
 
 app.post("/alldata",function(req,res){
@@ -60,7 +54,6 @@ app.post("/newdata",async function(req,res){
         })
         .catch(function(error){
             if(error.response){
-                let {status,statusText}=error.response;
                 console.log(error.response);
                 res.send(error)
             }else{

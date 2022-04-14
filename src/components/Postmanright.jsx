@@ -14,10 +14,25 @@ class Postmanright extends Component{
         headers:this.props.headers,
         status:"",
         statustext:"",
+        allqueryparams:[
+            {key:"",value:""},
+        ],
+        index:-1,
+        allheaders:[
+            {key:"",value:""},
+        ],
+        index1:-1,
     }
     handlechange=(e)=>{
        let s1={...this.state};
-       s1.data[e.currentTarget.name] = e.currentTarget.value;
+       console.log(e.currentTarget.id)
+       if(e.currentTarget.id==="query"){
+        s1.allqueryparams[s1.index][e.currentTarget.name] = e.currentTarget.value;
+        }else if(e.currentTarget.id==="header"){
+         s1.allheaders[s1.index1][e.currentTarget.name] = e.currentTarget.value;
+         }else{
+        s1.data[e.currentTarget.name] = e.currentTarget.value;
+         }
        this.setState(s1);
        this.props.ChangeData(this.state.data);
     }
@@ -47,6 +62,7 @@ class Postmanright extends Component{
                 alert("Please check JSON format which you want to post.")
             }
         }else{
+            console.log(s1.data);
             AllData={url:s1.data.url,method:s1.data.method};
             let response = await http.post("/newdata",AllData);
             console.log(response);
@@ -72,13 +88,53 @@ class Postmanright extends Component{
         this.fetchdata();
         this.props.onSend(s1.data);
     }
+    handleaddquery=()=>{
+        let s1={...this.state};
+        s1.allqueryparams.push({key:"",value:""});
+        this.setState(s1);
+    }
+    handleremovebtn=(index)=>{
+        let s1={...this.state};
+        if(s1.allqueryparams.length>1){
+            s1.allqueryparams.splice(index,1);
+        }else{
+            s1.allqueryparams[index].key="";
+            s1.allqueryparams[index].value="";
+        }
+        this.setState(s1);
+    }
+    setindex=(index)=>{
+        let s1={...this.state};
+        s1.index=index;
+        this.setState(s1);
+    }
+    handleaddheader=()=>{
+        let s1={...this.state};
+        s1.allheaders.push({key:"",value:""});
+        this.setState(s1);
+    }
+    handleremovebtn1=(index)=>{
+        let s1={...this.state};
+        if(s1.allheaders.length>1){
+            s1.allheaders.splice(index,1);
+        }else{
+            s1.allheaders[index].key="";
+            s1.allheaders[index].value="";
+        }
+        this.setState(s1);
+    }
+    setindex1=(index)=>{
+        let s1={...this.state};
+        s1.index1=index;
+        this.setState(s1);
+    }
     render(){
         let {url,method,postjson}=this.state.data;
-        let {alldata,status,headers}=this.state;
+        let {alldata,status,headers,allqueryparams,allheaders}=this.state;
         // console.log(this.props.alldata);
         // console.log(alldata)
-        console.log(this.props.headers);
-        console.log(headers)
+        // console.log(this.props.headers);
+        // console.log(headers)
         return(
             <div className="fullrightpannel">
             <div className="rightpannel">
@@ -99,7 +155,7 @@ class Postmanright extends Component{
                     </div>
                 </div>
                 <div className="input-group p-2">
-                        <select className="form-select flex-grow-0 w-auto" name="method" value={method}
+                        <select className="form-select flex-grow-0 w-auto" name="method" value={method} 
                             onChange={this.handlechange}>
                             <option value="GET" >GET</option>
                             <option value="POST">POST</option>
@@ -135,26 +191,35 @@ class Postmanright extends Component{
                     <div className="tab-content p-3 border-top-0 border">
                         <div className="tab-pane fade show active" id="query-params"
                             role="tabpanel" aria-labelledby="query-params-tab">
-                                <div data-query-params className="querydiv">
-                                    <div className="input-group">
-                                    <input className="form-control" type="text" placeholder="Key"></input>
-                                    <input className="form-control" type="text" placeholder="Value"></input>
-                                    <button type="button" className="btn btn-outline-danger">Remove</button>
-                                    </div>
+                            
+                                <div className="querydiv">
+                                <div className="queryScroller">
+                                    {allqueryparams.map((qu,index)=>(
+                                        <div className="input-group" onFocus={()=>this.setindex(index)}>
+                                        <input className="form-control" type="text" id="query" name={`key`} value={qu.key} placeholder="Key"  onChange={this.handlechange}></input>
+                                        <input className="form-control" type="text" id="query" name={`value`} value={qu.value} placeholder="Value" onChange={this.handlechange}></input>
+                                        <button type="button" className="btn btn-outline-danger" onClick={()=>this.handleremovebtn(index)}>Remove</button>
+                                        </div>
+                                    ))}
                                 <button data-add-query-param-btn className="mt-2 btn btn-outline-success"
-                                    type="button">Add</button>
+                                    type="button" onClick={()=>this.handleaddquery()}>Add</button>
                                 </div> 
+                            </div>
                         </div>
                         <div className="tab-pane fade " id="request-headers"
                             role="tabpanel" aria-labelledby="request-headers-tab">
-                                <div data-request-headers className="queryheaderdiv">
-                                <div className="input-group">
-                                    <input className="form-control" type="text" placeholder="Key"></input>
-                                    <input className="form-control" type="text" placeholder="Value"></input>
-                                    <button type="button" className="btn btn-outline-danger">Remove</button>
-                                    </div>
-                                <button data-add-request-headers-btn className="mt-2 btn btn-outline-success"
-                                    type="button" >Add</button>
+                            <div data-request-headers className="queryheaderdiv">
+                                <div className="queryheaderscroller">
+                                {allheaders.map((qu,index)=>(
+                                        <div className="input-group" onFocus={()=>this.setindex1(index)}>
+                                        <input className="form-control" type="text" id="header" name={`key`} value={qu.key} placeholder="Key"  onChange={this.handlechange}></input>
+                                        <input className="form-control" type="text" id="header" name={`value`} value={qu.value} placeholder="Value" onChange={this.handlechange}></input>
+                                        <button type="button" className="btn btn-outline-danger" onClick={()=>this.handleremovebtn1(index)}>Remove</button>
+                                        </div>
+                                    ))}
+                                <button data-add-query-param-btn className="mt-2 btn btn-outline-success"
+                                    type="button" onClick={()=>this.handleaddheader()}>Add</button>
+                                </div>
                                 </div> 
                         </div>
                         <div className="tab-pane " id="json"

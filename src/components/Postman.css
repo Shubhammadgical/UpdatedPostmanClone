@@ -159,6 +159,9 @@
     overflow-y: scroll;
     flex: 1;
 }
+
+
+
 /* side se scroller ki width*/
 .leftpannel ::-webkit-scrollbar{
     width: 5px;
@@ -292,6 +295,51 @@
 .jsondiv{
     height:165px;
 }
+
+
+
+.queryScroller{
+    background-attachment: fixed;
+    overflow-y: scroll;
+    flex: 1;
+    padding-right: 5px;
+    height: 165px;
+}
+/* side se scroller ki width*/
+.querydiv ::-webkit-scrollbar{
+    width: 5px;
+}
+/* side me scroller ka bg color*/
+.querydiv ::-webkit-scrollbar-track{
+    background: #e9e4e4;
+}
+/*scroller ka color*/
+.querydiv ::-webkit-scrollbar-thumb{
+    background: #aaa;
+}
+
+.queryheaderscroller{
+    background-attachment: fixed;
+    overflow-y: scroll;
+    flex: 1;
+    padding-right: 5px;
+    height: 165px;
+}
+.queryheaderdiv ::-webkit-scrollbar{
+    width: 5px;
+}
+/* side me scroller ka bg color*/
+.queryheaderdiv ::-webkit-scrollbar-track{
+    background: #e9e4e4;
+}
+/*scroller ka color*/
+.queryheaderdiv ::-webkit-scrollbar-thumb{
+    background: #aaa;
+}
+
+
+
+
 
 @media only screen and (max-width: 1261px) {
     .data{
