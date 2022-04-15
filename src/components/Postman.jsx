@@ -9,16 +9,22 @@ class Postman extends Component{
         data:{url:"",method:"",postjson:""},
         history:[],
         bgstyle:"",
-        highlight:"",
+        highlight:"true",
         alldata:"",
-        headers:""
+        headers:"",
+        allqueryparams:[
+            {key:"",value:""},
+        ],
+        querystr:""
     }
-    senddata=(data)=>{
+    senddata=(data,querystr)=>{
         let s1={...this.state};
         let data1={url:data.url,method:data.method};
         s1.highlight="true";
         console.log(s1.highlight)
         s1.history.unshift(data1);
+        s1.querystr=querystr;
+        console.log(querystr)
         this.setState(s1);
     }
     handlehistoryclick=(data)=>{
@@ -30,11 +36,13 @@ class Postman extends Component{
         s1.alldata="";
         s1.data.postjson="";
         s1.headers="";
+        s1.allqueryparams=[{key:"",value:""}];
+        s1.querystr="";
         this.setState(s1);
     }
     changedata=(newdata)=>{
         let s1={...this.state};
-        s1.data.url=newdata.url;
+        s1.data.url=newdata.data.url;
         this.setState(s1);
     }
     handleresponsedata=(data,headers,json)=>{
@@ -45,7 +53,9 @@ class Postman extends Component{
         this.setState(s1);
     }
     render(){
-        let {history,data,bgstyle,highlight,alldata,headers}=this.state;
+        let {history,data,bgstyle,highlight,alldata,headers,allqueryparams,querystr}=this.state;
+        console.log(allqueryparams);
+        console.log(querystr);
         return(
             <div>
                 <div className="headerdiv">
@@ -85,7 +95,9 @@ class Postman extends Component{
                         <Postmanleft history={history} onSend={this.handlehistoryclick} bgstyle={bgstyle} highlight={highlight}/>
                     </div>
                     <div className="right">
-                        <Postmanright onSend={this.senddata} ChangeData={this.changedata} OnSend={this.handleresponsedata} data={data} highlight={highlight} alldata={alldata} headers={headers}/>
+                        <Postmanright onSend={this.senddata} ChangeData={this.changedata} OnSend={this.handleresponsedata} 
+                        data={data} highlight={highlight} alldata={alldata} headers={headers}
+                        allqueryparams={allqueryparams} querystr={querystr}/>
                     </div>
                 </div>
             </div>

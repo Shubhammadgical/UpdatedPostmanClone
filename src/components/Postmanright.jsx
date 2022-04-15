@@ -14,28 +14,39 @@ class Postmanright extends Component{
         headers:this.props.headers,
         status:"",
         statustext:"",
-        allqueryparams:[
-            {key:"",value:""},
-        ],
+        allqueryparams:this.props.allqueryparams,
         index:-1,
         allheaders:[
             {key:"",value:""},
         ],
         index1:-1,
+        querystr:this.props.querystr,
     }
     handlechange=(e)=>{
-       let s1={...this.state};
-       console.log(e.currentTarget.id)
-       if(e.currentTarget.id==="query"){
+        let s1={...this.state};
+        console.log(e.currentTarget.id)
+        if(e.currentTarget.id==="query"){
         s1.allqueryparams[s1.index][e.currentTarget.name] = e.currentTarget.value;
+        s1.querystr="?";
+        for(let i=0; i < s1.allqueryparams.length; i++){
+            if(i===0){
+                s1.querystr = s1.querystr+s1.allqueryparams[i].key+"="+s1.allqueryparams[i].value;
+            }else if( i!=0 && i===s1.allqueryparams.length-1){
+                s1.querystr = s1.querystr+"&"+s1.allqueryparams[i].key+"="+s1.allqueryparams[i].value;
+            }else if( i!=0 && i!=s1.allqueryparams.length-1){
+                s1.querystr = s1.querystr+"&"+s1.allqueryparams[i].key+"="+s1.allqueryparams[i].value;
+            }
+        }
         }else if(e.currentTarget.id==="header"){
-         s1.allheaders[s1.index1][e.currentTarget.name] = e.currentTarget.value;
-         }else{
-        s1.data[e.currentTarget.name] = e.currentTarget.value;
-         }
-       this.setState(s1);
-       this.props.ChangeData(this.state.data);
+            s1.allheaders[s1.index1][e.currentTarget.name] = e.currentTarget.value;
+        }else{
+            s1.data[e.currentTarget.name] = e.currentTarget.value;
+        }
+        this.setState(s1);
+        console.log(s1.querystr);
+        this.props.ChangeData(this.state);
     }
+
     async fetchdata(){
         let s1={...this.state}
         let AllData;
@@ -63,7 +74,7 @@ class Postmanright extends Component{
             }
         }else{
             console.log(s1.data);
-            AllData={url:s1.data.url,method:s1.data.method};
+            AllData={url:s1.data.url+s1.querystr,method:s1.data.method};
             let response = await http.post("/newdata",AllData);
             console.log(response);
             s1.alldata=response.data;
@@ -86,7 +97,7 @@ class Postmanright extends Component{
         }
         this.setState(s1);
         this.fetchdata();
-        this.props.onSend(s1.data);
+        this.props.onSend(s1.data,s1.querystr);
     }
     handleaddquery=()=>{
         let s1={...this.state};
@@ -97,9 +108,21 @@ class Postmanright extends Component{
         let s1={...this.state};
         if(s1.allqueryparams.length>1){
             s1.allqueryparams.splice(index,1);
+            s1.querystr="?";
+            for(let i=0; i < s1.allqueryparams.length; i++){
+                if(i===0){
+                    s1.querystr = s1.querystr+s1.allqueryparams[i].key+"="+s1.allqueryparams[i].value;
+                }else if( i!=0 && i===s1.allqueryparams.length-1){
+                    s1.querystr = s1.querystr+"&"+s1.allqueryparams[i].key+"="+s1.allqueryparams[i].value;
+                }else if( i!=0 && i!=s1.allqueryparams.length-1){
+                    s1.querystr = s1.querystr+"&"+s1.allqueryparams[i].key+"="+s1.allqueryparams[i].value;
+                }
+            }
+            console.log(s1.querystr);
         }else{
             s1.allqueryparams[index].key="";
             s1.allqueryparams[index].value="";
+            s1.querystr="";
         }
         this.setState(s1);
     }
@@ -130,17 +153,17 @@ class Postmanright extends Component{
     }
     render(){
         let {url,method,postjson}=this.state.data;
-        let {alldata,status,headers,allqueryparams,allheaders}=this.state;
-        // console.log(this.props.alldata);
-        // console.log(alldata)
-        // console.log(this.props.headers);
-        // console.log(headers)
+        let {alldata,status,headers,allqueryparams,allheaders,querystr}=this.state;
+        console.log(this.props.allqueryparams)
+        console.log(this.props.querystr);
+        console.log(allqueryparams);
+        console.log(querystr);
         return(
             <div className="fullrightpannel">
             <div className="rightpannel">
                 <div className="urlsavebtndiv">
                     <div className="showurl">
-                        <b>{url.length>50 ? url.substring(0,50)+"...":url}</b>
+                        <b>{url.length>40 || querystr.length>40 ? url.substring(0,40)+querystr.substring(0,10)+"...":url+querystr}</b>
                     </div>
                     <div className="divdiv" style={{width:"100%"}}></div>
                     <div>
