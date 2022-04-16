@@ -15,16 +15,17 @@ class Postman extends Component{
         allqueryparams:[
             {key:"",value:""},
         ],
-        querystr:""
+        querystr:"",
+        allheaders:[
+            {key:"",value:""},
+        ],
     }
     senddata=(data,querystr)=>{
         let s1={...this.state};
         let data1={url:data.url,method:data.method};
         s1.highlight="true";
-        console.log(s1.highlight)
         s1.history.unshift(data1);
         s1.querystr=querystr;
-        console.log(querystr)
         this.setState(s1);
     }
     handlehistoryclick=(data)=>{
@@ -37,12 +38,15 @@ class Postman extends Component{
         s1.data.postjson="";
         s1.headers="";
         s1.allqueryparams=[{key:"",value:""}];
+        s1.allheaders=[{key:"",value:""}];
         s1.querystr="";
         this.setState(s1);
     }
     changedata=(newdata)=>{
         let s1={...this.state};
         s1.data.url=newdata.data.url;
+        s1.highlight=newdata.highlight;
+        s1.allheaders=newdata.allheaders;
         this.setState(s1);
     }
     handleresponsedata=(data,headers,json)=>{
@@ -53,9 +57,7 @@ class Postman extends Component{
         this.setState(s1);
     }
     render(){
-        let {history,data,bgstyle,highlight,alldata,headers,allqueryparams,querystr}=this.state;
-        console.log(allqueryparams);
-        console.log(querystr);
+        let {history,data,bgstyle,highlight,alldata,headers,allqueryparams,querystr,allheaders}=this.state;
         return(
             <div>
                 <div className="headerdiv">
@@ -97,7 +99,7 @@ class Postman extends Component{
                     <div className="right">
                         <Postmanright onSend={this.senddata} ChangeData={this.changedata} OnSend={this.handleresponsedata} 
                         data={data} highlight={highlight} alldata={alldata} headers={headers}
-                        allqueryparams={allqueryparams} querystr={querystr}/>
+                        allqueryparams={allqueryparams} querystr={querystr} allheaders={allheaders}/>
                     </div>
                 </div>
             </div>

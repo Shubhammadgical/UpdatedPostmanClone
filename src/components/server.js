@@ -45,9 +45,9 @@ app.post("/alldata",function(req,res){
 app.post("/newdata",async function(req,res){
     let body=req.body;
     console.log(body);
-    let newdata={url:body.url,method:body.method,json:body.json};
+    let newdata={url:body.url,method:body.method,json:body.json,headers:body.headers};
     if(newdata.method==="GET"){
-      await axios.get(`${newdata.url}`)
+      await axios.get(`${newdata.url}`,newdata.headers)
         .then(function(response){
             console.log(response);
             res.send(response.data);

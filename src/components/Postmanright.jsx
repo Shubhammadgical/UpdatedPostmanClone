@@ -4,8 +4,7 @@ import './Postman.css';
 import http from "./http";
 import JSONPretty from "react-json-pretty";
 import { HiOutlineLightBulb } from "react-icons/hi";
-import { BiMessageDetail, BiPencil } from "react-icons/bi";
-
+import { BiMessageDetail} from "react-icons/bi";
 
 class Postmanright extends Component{
     state={
@@ -16,15 +15,31 @@ class Postmanright extends Component{
         statustext:"",
         allqueryparams:this.props.allqueryparams,
         index:-1,
-        allheaders:[
-            {key:"",value:""},
-        ],
+        allheaders:this.props.allheaders,
         index1:-1,
         querystr:this.props.querystr,
+        highlight:this.props.highlight
+    }
+    componentDidMount=()=>{
+        let s1={...this.state};
+        s1.allqueryparams=this.props.allqueryparams;
+        s1.querystr=this.props.querystr;
+        s1.allheaders=this.props.allheaders;
+        this.setState(s1);
+    }
+    componentDidUpdate=(prevProps,prevState)=>{
+        if(prevProps!==this.props){
+            let s1={...this.state};
+            if(this.props.highlight==="false"){
+                s1.querystr="";
+            }
+            s1.allqueryparams=this.props.allqueryparams;
+            s1.allheaders=this.props.allheaders;
+            this.setState(s1);
+        }
     }
     handlechange=(e)=>{
         let s1={...this.state};
-        console.log(e.currentTarget.id)
         if(e.currentTarget.id==="query"){
         s1.allqueryparams[s1.index][e.currentTarget.name] = e.currentTarget.value;
         s1.querystr="?";
@@ -43,7 +58,6 @@ class Postmanright extends Component{
             s1.data[e.currentTarget.name] = e.currentTarget.value;
         }
         this.setState(s1);
-        console.log(s1.querystr);
         this.props.ChangeData(this.state);
     }
 
@@ -53,7 +67,7 @@ class Postmanright extends Component{
         if(s1.data.method==="POST"){
             try{
                 let post=JSON.parse(s1.data.postjson);
-                AllData={url:s1.data.url,method:s1.data.method,json:post};
+                AllData={url:s1.data.url,method:s1.data.method,json:post,headers:s1.allheaders};
                 console.log("true");
                 let response = await http.post("/newdata",AllData);
                 console.log(response);
@@ -74,7 +88,7 @@ class Postmanright extends Component{
             }
         }else{
             console.log(s1.data);
-            AllData={url:s1.data.url+s1.querystr,method:s1.data.method};
+            AllData={url:s1.data.url+s1.querystr,method:s1.data.method,headers:s1.allheaders};
             let response = await http.post("/newdata",AllData);
             console.log(response);
             s1.alldata=response.data;
@@ -97,6 +111,7 @@ class Postmanright extends Component{
         }
         this.setState(s1);
         this.fetchdata();
+        console.log(s1.data);
         this.props.onSend(s1.data,s1.querystr);
     }
     handleaddquery=()=>{
@@ -154,16 +169,13 @@ class Postmanright extends Component{
     render(){
         let {url,method,postjson}=this.state.data;
         let {alldata,status,headers,allqueryparams,allheaders,querystr}=this.state;
-        console.log(this.props.allqueryparams)
-        console.log(this.props.querystr);
-        console.log(allqueryparams);
-        console.log(querystr);
+        let urllen=url+querystr;
         return(
             <div className="fullrightpannel">
             <div className="rightpannel">
                 <div className="urlsavebtndiv">
                     <div className="showurl">
-                        <b>{url.length>40 || querystr.length>40 ? url.substring(0,40)+querystr.substring(0,10)+"...":url+querystr}</b>
+                        <b>{urllen.length>50 ? urllen.substring(0,50)+"...":urllen}</b>
                     </div>
                     <div className="divdiv" style={{width:"100%"}}></div>
                     <div>
