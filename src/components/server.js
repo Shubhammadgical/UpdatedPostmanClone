@@ -35,7 +35,6 @@ app.post("/alldata",function(req,res){
     try{
         questions.push(body);
         res.send(body);
-        console.log(questions)
     }catch{
         res.status(404).send("Error in posting Data. URL not found or check internet connection");
         console.log("err")
@@ -46,10 +45,11 @@ app.post("/newdata",async function(req,res){
     let body=req.body;
     console.log(body);
     let newdata={url:body.url,method:body.method,json:body.json,headers:body.headers};
+    let headers=newdata.headers;
     if(newdata.method==="GET"){
-      await axios.get(`${newdata.url}`,newdata.headers)
+      await axios.get(`${newdata.url}`,headers={headers})
         .then(function(response){
-            console.log(response);
+            console.log(response.config);
             res.send(response.data);
         })
         .catch(function(error){
@@ -62,9 +62,13 @@ app.post("/newdata",async function(req,res){
             }
         })
     }else if(newdata.method==="POST"){
-        await axios.post(`${newdata.url}`,newdata.json)
-            .then(function(){
-                res.send(newdata.json);
+        let url=`${newdata.url}`;
+        let body= newdata.json;
+        let headers= newdata.headers;
+        await axios.post(url, body ,headers={headers})
+            .then(function(response){
+                console.log(response.config)
+                res.send(body);
             })
             .catch(function(error){
                 if(error.response){

@@ -64,10 +64,15 @@ class Postmanright extends Component{
     async fetchdata(){
         let s1={...this.state}
         let AllData;
+        let head={};
+        for(let i=0;i<s1.allheaders.length;i++){
+            head[s1.allheaders[i].key]=s1.allheaders[i].value;
+        }
+        console.log(head);
         if(s1.data.method==="POST"){
             try{
                 let post=JSON.parse(s1.data.postjson);
-                AllData={url:s1.data.url,method:s1.data.method,json:post,headers:s1.allheaders};
+                AllData={url:s1.data.url,method:s1.data.method,json:post,headers:head};
                 console.log("true");
                 let response = await http.post("/newdata",AllData);
                 console.log(response);
@@ -88,7 +93,7 @@ class Postmanright extends Component{
             }
         }else{
             console.log(s1.data);
-            AllData={url:s1.data.url+s1.querystr,method:s1.data.method,headers:s1.allheaders};
+            AllData={url:s1.data.url+s1.querystr,method:s1.data.method,headers:head};
             let response = await http.post("/newdata",AllData);
             console.log(response);
             s1.alldata=response.data;
