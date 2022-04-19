@@ -32,6 +32,8 @@ app.get("/alldata",function(req,res){
 
 app.post("/alldata",function(req,res){
     let body=req.body;
+    console.log("alldata")
+    console.log(req.headers)
     try{
         questions.push(body);
         res.send(body);
@@ -43,14 +45,21 @@ app.post("/alldata",function(req,res){
 
 app.post("/newdata",async function(req,res){
     let body=req.body;
-    console.log(body);
     let newdata={url:body.url,method:body.method,json:body.json,headers:body.headers};
     let headers=newdata.headers;
+    console.log(headers)
     if(newdata.method==="GET"){
       await axios.get(`${newdata.url}`,headers={headers})
         .then(function(response){
-            console.log(response.config);
-            res.send(response.data);
+            const Alldata={
+                data:response.data,
+                status:response.status,
+                statusText:response.statusText,
+                headers:response.headers,
+                config:response.config
+            }
+            console.log(Alldata)
+            res.send(Alldata);
         })
         .catch(function(error){
             if(error.response){
@@ -67,8 +76,19 @@ app.post("/newdata",async function(req,res){
         let headers= newdata.headers;
         await axios.post(url, body ,headers={headers})
             .then(function(response){
-                console.log(response.config)
-                res.send(body);
+                const Alldata={
+                    data:response.data,
+                    status:response.status,
+                    statusText:response.statusText,
+                    headers:response.headers,
+                    config:response.config
+                }
+                // console.log(response.data);
+                // console.log(response.status);
+                // console.log(response.statusText);
+                // console.log(response.headers);
+                //console.log(Alldata)
+                res.send(Alldata);
             })
             .catch(function(error){
                 if(error.response){

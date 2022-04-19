@@ -65,8 +65,11 @@ class Postmanright extends Component{
         let s1={...this.state}
         let AllData;
         let head={};
+        
         for(let i=0;i<s1.allheaders.length;i++){
+            if(s1.allheaders[i].key!="" || s1.allheaders[i].value!=""){
             head[s1.allheaders[i].key]=s1.allheaders[i].value;
+            }
         }
         console.log(head);
         if(s1.data.method==="POST"){
@@ -75,9 +78,14 @@ class Postmanright extends Component{
                 AllData={url:s1.data.url,method:s1.data.method,json:post,headers:head};
                 console.log("true");
                 let response = await http.post("/newdata",AllData);
-                console.log(response);
-                s1.alldata=response.data;
-                s1.headers=response.headers;
+                console.log(response.data);
+                s1.alldata=response.data.data;
+                s1.headers=response.data.headers;
+                if(response.data.data){
+                    s1.alldata=response.data.data;
+                }else{
+                    s1.alldata=response.data;
+                }
                 if(response.data.status){
                     s1.status=response.data.status;
                 }else if(response.status){
@@ -95,9 +103,14 @@ class Postmanright extends Component{
             console.log(s1.data);
             AllData={url:s1.data.url+s1.querystr,method:s1.data.method,headers:head};
             let response = await http.post("/newdata",AllData);
-            console.log(response);
-            s1.alldata=response.data;
-            s1.headers=response.headers;
+            console.log(response.data);
+            if(response.data.data){
+                s1.alldata=response.data.data;
+            }else{
+                s1.alldata=response.data;
+            }
+            s1.headers=response.data.headers;
+            console.log(s1.headers)
             if(response.data.status){
                 s1.status=response.data.status;
             }else if(response.status){
@@ -301,9 +314,10 @@ class Postmanright extends Component{
                         </div>
                         <div className="tab-pane fade " id="response-headers"
                             role="tabpanel" aria-labelledby="response-headers-tab">
-                            <div className="overflow-auto">
-                                        <div className="responsiveheaderdiv">
-                                        {this.props.headers && headers ? <div>
+                            <div className="responsiveheaderdiv">
+                                        <div className="responsiveheaderscroller">
+                                        {this.props.headers && headers ? 
+                                        <div >
                                         <div className="row ">
                                             <div className="col-6 border p-2" >
                                                 Content-Length 
@@ -319,7 +333,79 @@ class Postmanright extends Component{
                                             <div className="col-6 border p-2">
                                                 {headers['content-type']}
                                             </div>
-                                        </div></div>
+                                        </div>
+                                        <div className="row ">
+                                            <div className="col-6 border p-2">
+                                            access-control-allow-headers
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['access-control-allow-headers']}
+                                            </div>
+                                        </div><div className="row ">
+                                            <div className="col-6 border p-2">
+                                            access-control-allow-methods
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['access-control-allow-methods']}
+                                            </div>
+                                        </div><div className="row ">
+                                            <div className="col-6 border p-2">
+                                            access-control-allow-origin
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['access-control-allow-origin']}
+                                            </div>
+                                        </div><div className="row ">
+                                            <div className="col-6 border p-2">
+                                            connection
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['connection']}
+                                            </div>
+                                        </div><div className="row ">
+                                            <div className="col-6 border p-2">
+                                            date
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['date']}
+                                            </div>
+                                        </div><div className="row ">
+                                            <div className="col-6 border p-2">
+                                                etag
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['etag']}
+                                            </div>
+                                        </div>
+                                        <div className="row ">
+                                            <div className="col-6 border p-2">
+                                            x-powered-by
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['x-powered-by']}
+                                            </div>
+                                        </div>
+                                        {headers['server'] ? 
+                                        <div className="row ">
+                                            <div className="col-6 border p-2">
+                                            server
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['server']}
+                                            </div>
+                                        </div>
+                                        :""}
+                                        {headers['via'] ? 
+                                        <div className="row ">
+                                            <div className="col-6 border p-2">
+                                            via
+                                            </div>
+                                            <div className="col-6 border p-2">
+                                                {headers['via']}
+                                            </div>
+                                        </div>
+                                        :""}
+                                        </div>
                                         : ""}
                                         </div>
                             </div>

@@ -91,9 +91,28 @@
 .penmsgdiv{
     display: inline-flex;
 }
+
+.responsiveheaderscroller{
+    background-attachment: fixed;
+    overflow-y: scroll;
+    flex: 1;
+}
+.responsiveheaderdiv ::-webkit-scrollbar{
+    width: 5px;
+}
+/* side me scroller ka bg color*/
+.responsiveheaderdiv ::-webkit-scrollbar-track{
+    background: "";
+}
+/*scroller ka color*/
+.responsiveheaderdiv ::-webkit-scrollbar-thumb{
+    background: #aaa;
+}
 .responsiveheaderdiv{
     height:200px;
-    min-width:1055px;
+    min-width:1040px;
+    display: flex;
+    flex-direction: column;
 }
 
 
