@@ -226,10 +226,14 @@ class Postmanright extends Component {
     let { alldata, status, headers, allqueryparams, allheaders, querystr } =
       this.state;
     let urllen = url + querystr;
-    let headerKeys = Object.keys(headers);
-    let headervalues = Object.values(headers);
-    console.log(headerKeys);
-    console.log(headervalues);
+    let headerKeys;
+    let headervalues;
+    if (this.props.headers && headers) {
+      headerKeys = Object.keys(headers);
+      headervalues = Object.values(headers);
+      console.log(headerKeys);
+      console.log(headervalues);
+    }
     return (
       <div className="fullrightpannel">
         <div className="rightpannel">
@@ -520,8 +524,10 @@ class Postmanright extends Component {
                       {this.props.headers && headers
                         ? headerKeys.map((head, index) => (
                             <div className="row ">
-                              <div className="col-6 border p-2">{head}</div>
-                              <div className="col-6 border p-2">
+                              <div className=" p-2" style={{ width: "300px" }}>
+                                {head}
+                              </div>
+                              <div className=" p-2" style={{ width: "700px" }}>
                                 {headervalues[index]}
                               </div>
                             </div>

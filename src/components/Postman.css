@@ -1,397 +1,387 @@
-*{
-    padding: 0;
-    margin: 0;
-  }
-.headerdiv{
-    display: inline-flex;
-    width: 100%;
-    min-width: 1533px;
-    align-items: center;
-    text-align: center;
+* {
+  padding: 0;
+  margin: 0;
 }
-.headeroptionsdiv{
-    display: inline-flex;
-    width: 425px;
-    color: rgb(145, 132, 132);
+.headerdiv {
+  display: inline-flex;
+  width: 100%;
+  min-width: 1533px;
+  align-items: center;
+  text-align: center;
 }
-.postmanlogodiv{
-    margin-left: 5px;
+.headeroptionsdiv {
+  display: inline-flex;
+  width: 425px;
+  color: rgb(145, 132, 132);
 }
-.headeroptionsdiv div{
-    margin-left: 10px;
-    margin-right: 5px;
+.postmanlogodiv {
+  margin-left: 5px;
 }
-.headersearchdiv{
-    margin-right: 50px;
-    margin-left: 50px;
-    width: 500px;
-    min-width: 300px;
-    max-width: 500px;
-    margin: 5px;
+.headeroptionsdiv div {
+  margin-left: 10px;
+  margin-right: 5px;
 }
-.invite button{
-    display: inline-flex;
-    text-align: center;
-    align-items: center;
+.headersearchdiv {
+  margin-right: 50px;
+  margin-left: 50px;
+  width: 500px;
+  min-width: 300px;
+  max-width: 500px;
+  margin: 5px;
 }
-.logo{
-    width: 32px;
-    height: 32px;
+.invite button {
+  display: inline-flex;
+  text-align: center;
+  align-items: center;
 }
-.upgrade{
-    background-color: rgb(240, 238, 238);
-    margin-right: 5px;
+.logo {
+  width: 32px;
+  height: 32px;
 }
-.icons{
-    display: inline-flex;
-    width: 100px;
+.upgrade {
+  background-color: rgb(240, 238, 238);
+  margin-right: 5px;
 }
-.icons div{
-    width: 40px;
-    color: #aaa;
+.icons {
+  display: inline-flex;
+  width: 100px;
+}
+.icons div {
+  width: 40px;
+  color: #aaa;
 }
 .form-control:focus {
-    color: #212529;
-    background-color:none;
-    border-color: none;
-    outline: 0;
-    border:1px solid lightgray;
-    box-shadow: 0 0 0 0;
+  color: #212529;
+  background-color: none;
+  border-color: none;
+  outline: 0;
+  border: 1px solid lightgray;
+  box-shadow: 0 0 0 0;
 }
-.btn-check:focus+.btn-primary, .btn-primary:focus {
-    color: #fff;
-    background-color: none;
-    border-color: none;
-    box-shadow: 0 0 0 0;
+.btn-check:focus + .btn-primary,
+.btn-primary:focus {
+  color: #fff;
+  background-color: none;
+  border-color: none;
+  box-shadow: 0 0 0 0;
 }
-.btn-check:focus+.btn, .btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0 ;
+.btn-check:focus + .btn,
+.btn:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0;
 }
-.data{
-    display: inline-flex;
-    height: 100%;
-    width: 100%;
+.data {
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
 }
-.left{
-    width:370px;
-    height:100%;
+.left {
+  width: 370px;
+  height: 100%;
 }
-.right{
-    width: 100%;
-    height: 100%;
+.right {
+  width: 100%;
+  height: 100%;
 }
-.fullrightpannel{
-    display: inline-flex;
-    width: 100%;
+.fullrightpannel {
+  display: inline-flex;
+  width: 100%;
 }
-.rightpannel{
-    width: 100%;
+.rightpannel {
+  width: 100%;
 }
-.penmsgdiv{
-    display: inline-flex;
+.penmsgdiv {
+  display: inline-flex;
 }
 
-.responsiveheaderscroller{
-    background-attachment: fixed;
-    overflow-y: scroll;
-    flex: 1;
+.responsiveheaderscroller {
+  background-attachment: fixed;
+  overflow-y: scroll;
+  flex: 1;
 }
-.responsiveheaderdiv ::-webkit-scrollbar{
-    width: 5px;
+.responsiveheaderdiv ::-webkit-scrollbar {
+  width: 5px;
 }
 /* side me scroller ka bg color*/
-.responsiveheaderdiv ::-webkit-scrollbar-track{
-    background: "";
+.responsiveheaderdiv ::-webkit-scrollbar-track {
+  background: "";
 }
 /*scroller ka color*/
-.responsiveheaderdiv ::-webkit-scrollbar-thumb{
-    background: #aaa;
+.responsiveheaderdiv ::-webkit-scrollbar-thumb {
+  background: #aaa;
 }
-.responsiveheaderdiv{
-    height:200px;
-    min-width:1040px;
-    display: flex;
-    flex-direction: column;
+.responsiveheaderdiv {
+  height: 200px;
+  min-width: 1040px;
+  display: flex;
+  flex-direction: column;
 }
 
-
-.urltext{
-    width: 10%;
+.urltext {
+  width: 10%;
 }
-.method{
-    color: orange;
+.method {
+  color: orange;
 }
-.bodydata{
-    margin: 10px;
+.bodydata {
+  margin: 10px;
 }
-.bodydata textarea{
-    display: block;
-    flex: 1;
-    width: 100%;
-    min-height:165px;
-    max-height: 165px;
-    font-size: 15px;
-    padding: 10px;
+.bodydata textarea {
+  display: block;
+  flex: 1;
+  width: 100%;
+  min-height: 165px;
+  max-height: 165px;
+  font-size: 15px;
+  padding: 10px;
 }
-.responsedata{
-    height: 100%;
-    border: 1px solid gray;
-    margin: 10px;
-    background-attachment: fixed;
-    overflow-y: scroll;
-    flex: 1;
+.responsedata {
+  height: 100%;
+  border: 1px solid gray;
+  margin: 10px;
+  background-attachment: fixed;
+  overflow-y: scroll;
+  flex: 1;
 }
-.rightscroller{
-    background-attachment: fixed;
-    overflow-y: scroll;
-    flex: 1;
+.rightscroller {
+  background-attachment: fixed;
+  overflow-y: scroll;
+  flex: 1;
 }
-.rightscrollerbody ::-webkit-scrollbar{
-    width: 5px;
+.rightscrollerbody ::-webkit-scrollbar {
+  width: 5px;
 }
 /* side me scroller ka bg color*/
-.rightscrollerbody ::-webkit-scrollbar-track{
-    background: "";
+.rightscrollerbody ::-webkit-scrollbar-track {
+  background: "";
 }
 /*scroller ka color*/
-.rightscrollerbody ::-webkit-scrollbar-thumb{
-    background: #aaa;
+.rightscrollerbody ::-webkit-scrollbar-thumb {
+  background: #aaa;
 }
-.rightscrollerbody{
-    height: 200px;
-    /*width: 1057px;*/
-    display: flex;
-    flex-direction: column;
+.rightscrollerbody {
+  height: 200px;
+  /*width: 1057px;*/
+  display: flex;
+  flex-direction: column;
 }
-.__json-pretty-error__{
-    height: 180px;
-    width: 1050px;
+.__json-pretty-error__ {
+  height: 180px;
+  width: 1050px;
 }
-.__json-pretty__{
-    height: 184px;
-    width: 1050px;
-}
-
-.leftscroller{
-    background-attachment: fixed;
-    overflow-y: scroll;
-    flex: 1;
+.__json-pretty__ {
+  height: 184px;
+  width: 1050px;
 }
 
-
+.leftscroller {
+  background-attachment: fixed;
+  overflow-y: scroll;
+  flex: 1;
+}
 
 /* side se scroller ki width*/
-.leftpannel ::-webkit-scrollbar{
-    width: 5px;
+.leftpannel ::-webkit-scrollbar {
+  width: 5px;
 }
 /* side me scroller ka bg color*/
-.leftpannel ::-webkit-scrollbar-track{
-    background: #e9e4e4;
+.leftpannel ::-webkit-scrollbar-track {
+  background: #e9e4e4;
 }
 /*scroller ka color*/
-.leftpannel ::-webkit-scrollbar-thumb{
-    background: #aaa;
+.leftpannel ::-webkit-scrollbar-thumb {
+  background: #aaa;
 }
-.leftpannel{
-    height: 615px;
-    width: 280px;
-    background-color: rgb(250, 244, 244);
-    display: flex;
-    flex-direction: column;
-}
-
-.row{
-    --bs-gutter-x: 0;
-    margin: 0px;
+.leftpannel {
+  height: 615px;
+  width: 280px;
+  background-color: rgb(250, 244, 244);
+  display: flex;
+  flex-direction: column;
 }
 
-
-.myworkspace{
-    font-size: 15px;
-    padding: 5px;
-    background-color: rgb(248, 246, 246);
-    height: 40px;
-    width: 370px;
-    border-bottom: 1px solid lightgray;
-    align-items: center;
-}
-.myworkspace button{
-    float: right;
-    background-color: rgb(240, 238, 238);
-    margin: 2px;
-    font-size: 12px;
-}
-.myworkspace b{
-    padding-top: 2px;
-}
-.navbar input{
-    height: 35px;
-}
-.leftside{
-    width: 370px;
-}
-.options{
-    width: 100px;
+.row {
+  --bs-gutter-x: 0;
+  margin: 0px;
 }
 
-
-
-.leftleft{
-    display: inline-flex;
-    background-color: rgb(248, 246, 246);
-    height: 100%;
+.myworkspace {
+  font-size: 15px;
+  padding: 5px;
+  background-color: rgb(248, 246, 246);
+  height: 40px;
+  width: 370px;
+  border-bottom: 1px solid lightgray;
+  align-items: center;
 }
-.leftoptions{
-    width: 90px;
-    height: 100%;
-    font-size: 11px;
+.myworkspace button {
+  float: right;
+  background-color: rgb(240, 238, 238);
+  margin: 2px;
+  font-size: 12px;
 }
-.leftoptions div{
-    height: 109px;
-    padding-top: 32px;
-    text-align: center;
-    align-items: center;
-    border-bottom:0.1px solid lightgray;
-    border-right:0.1px solid lightgray;
+.myworkspace b {
+  padding-top: 2px;
 }
-.historypannel input{
-    height: 25px;
+.navbar input {
+  height: 35px;
 }
-.urlsavebtndiv{
-    display: inline-flex;
-    border: 1px solid lightgray;
-    padding: 10px;
-    width: 100%;
+.leftside {
+  width: 370px;
 }
-.showurl{
-    padding-top: 4px;
-    width: 100%;
-    font-size: 15px;
-}
-.urlsavebtndiv button{
-    margin: 2px;
-    background-color: rgb(240, 238, 238);
-}
-.rightoptions{
-    border:1px solid lightgray;
-    width: 58px;
-    text-align: center;
-}
-.rightoptions div{
-    padding: 10px;
-    height: 50px;
-}
-.invite{
-    text-align: center;
-    align-items: center;
-}
-.invite button{
-    height: 25px;
-    padding-right: 5px;
-    padding-left: 5px;
-    padding-top: 0px;
-}
-.lefticons{
-    height: 20px;
-   width: 20px;
-}
-.searchicon{
-    position:absolute;
-    padding-top: 3px;
-    padding-left: 7px;
-}
-.historydiv{
-    display: inline-flex;
+.options {
+  width: 100px;
 }
 
-.querydiv{
-    height:165px;
+.leftleft {
+  display: inline-flex;
+  background-color: rgb(248, 246, 246);
+  height: 100%;
 }
-.queryheaderdiv{
-    height:165px;
+.leftoptions {
+  width: 90px;
+  height: 100%;
+  font-size: 11px;
 }
-.jsondiv{
-    height:165px;
+.leftoptions div {
+  height: 109px;
+  padding-top: 32px;
+  text-align: center;
+  align-items: center;
+  border-bottom: 0.1px solid lightgray;
+  border-right: 0.1px solid lightgray;
+}
+.historypannel input {
+  height: 25px;
+}
+.urlsavebtndiv {
+  display: inline-flex;
+  border: 1px solid lightgray;
+  padding: 10px;
+  width: 100%;
+}
+.showurl {
+  padding-top: 4px;
+  width: 100%;
+  font-size: 15px;
+}
+.urlsavebtndiv button {
+  margin: 2px;
+  background-color: rgb(240, 238, 238);
+}
+.rightoptions {
+  border: 1px solid lightgray;
+  width: 58px;
+  text-align: center;
+}
+.rightoptions div {
+  padding: 10px;
+  height: 50px;
+}
+.invite {
+  text-align: center;
+  align-items: center;
+}
+.invite button {
+  height: 25px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-top: 0px;
+}
+.lefticons {
+  height: 20px;
+  width: 20px;
+}
+.searchicon {
+  position: absolute;
+  padding-top: 3px;
+  padding-left: 7px;
+}
+.historydiv {
+  display: inline-flex;
 }
 
+.querydiv {
+  height: 165px;
+}
+.queryheaderdiv {
+  height: 165px;
+}
+.jsondiv {
+  height: 165px;
+}
 
-
-.queryScroller{
-    background-attachment: fixed;
-    overflow-y: scroll;
-    flex: 1;
-    padding-right: 5px;
-    height: 165px;
+.queryScroller {
+  background-attachment: fixed;
+  overflow-y: scroll;
+  flex: 1;
+  padding-right: 5px;
+  height: 165px;
 }
 /* side se scroller ki width*/
-.querydiv ::-webkit-scrollbar{
-    width: 5px;
+.querydiv ::-webkit-scrollbar {
+  width: 5px;
 }
 /* side me scroller ka bg color*/
-.querydiv ::-webkit-scrollbar-track{
-    background: #e9e4e4;
+.querydiv ::-webkit-scrollbar-track {
+  background: #e9e4e4;
 }
 /*scroller ka color*/
-.querydiv ::-webkit-scrollbar-thumb{
-    background: #aaa;
+.querydiv ::-webkit-scrollbar-thumb {
+  background: #aaa;
 }
 
-.queryheaderscroller{
-    background-attachment: fixed;
-    overflow-y: scroll;
-    flex: 1;
-    padding-right: 5px;
-    height: 165px;
+.queryheaderscroller {
+  background-attachment: fixed;
+  overflow-y: scroll;
+  flex: 1;
+  padding-right: 5px;
+  height: 165px;
 }
-.queryheaderdiv ::-webkit-scrollbar{
-    width: 5px;
+.queryheaderdiv ::-webkit-scrollbar {
+  width: 5px;
 }
 /* side me scroller ka bg color*/
-.queryheaderdiv ::-webkit-scrollbar-track{
-    background: #e9e4e4;
+.queryheaderdiv ::-webkit-scrollbar-track {
+  background: #e9e4e4;
 }
 /*scroller ka color*/
-.queryheaderdiv ::-webkit-scrollbar-thumb{
-    background: #aaa;
+.queryheaderdiv ::-webkit-scrollbar-thumb {
+  background: #aaa;
 }
-
-
-
-
 
 @media only screen and (max-width: 1261px) {
-    .data{
-        width: 1250px;
-    }
+  .data {
+    width: 1250px;
+  }
 }
 @media only screen and (min-height: 1333px) {
-    .leftpannel{
-        height: 650px;
-    }
-    .querydiv{
-        height:205px;
-    }
-    .queryheaderdiv{
-        height:205px;
-    }
-    .jsondiv{
-        height:205px;
-    }
-    .bodydata textarea{
-        min-height: 200px;
-        max-height: 200px;
-    }
-    .leftoptions div{
-        height: 115px;
-        padding-top: 35px;
-    }
-    .__json-pretty-error__{
-        height: 180px;
-        width: 1070px;
-    }
-    .__json-pretty__{
-        height: 184px;
-        width: 1070px;
-    }
+  .leftpannel {
+    height: 650px;
+  }
+  .querydiv {
+    height: 205px;
+  }
+  .queryheaderdiv {
+    height: 205px;
+  }
+  .jsondiv {
+    height: 205px;
+  }
+  .bodydata textarea {
+    min-height: 200px;
+    max-height: 200px;
+  }
+  .leftoptions div {
+    height: 115px;
+    padding-top: 35px;
+  }
+  .__json-pretty-error__ {
+    height: 180px;
+    width: 1070px;
+  }
+  .__json-pretty__ {
+    height: 184px;
+    width: 1070px;
+  }
 }
