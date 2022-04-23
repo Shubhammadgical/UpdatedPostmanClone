@@ -79,7 +79,9 @@ class Postmanright extends Component {
     let s1 = { ...this.state };
     let AllData;
     let head = {};
-
+    // if (s1.data.url.substring(0, 1) !== "h") {
+    //   console.log(`${s1.data.url.substring(0, 1)}${s1.data.url}`);
+    // }
     for (let i = 0; i < s1.allheaders.length; i++) {
       if (s1.allheaders[i].key != "" || s1.allheaders[i].value != "") {
         head[s1.allheaders[i].key] = s1.allheaders[i].value;
@@ -90,7 +92,7 @@ class Postmanright extends Component {
       try {
         let post = JSON.parse(s1.data.postjson);
         AllData = {
-          url: s1.data.url,
+          url: s1.data.url + s1.querystr,
           method: s1.data.method,
           json: post,
           headers: head,
@@ -282,7 +284,7 @@ class Postmanright extends Component {
               value={url}
               onChange={this.handlechange}
               type="url"
-              placeholder="http://localhost:2410/example"
+              placeholder="http://google.com"
             ></input>
             <button
               className="btn btn-primary"
