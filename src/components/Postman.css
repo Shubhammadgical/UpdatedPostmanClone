@@ -193,7 +193,7 @@
   background: #aaa;
 }
 .leftpannel {
-  height: 615px;
+  height: 621px;
   width: 280px;
   background-color: rgb(250, 244, 244);
   display: flex;
@@ -244,7 +244,7 @@
   font-size: 11px;
 }
 .leftoptions div {
-  height: 109px;
+  height: 110.5px;
   padding-top: 32px;
   text-align: center;
   align-items: center;
@@ -357,7 +357,7 @@
 }
 @media only screen and (min-height: 1333px) {
   .leftpannel {
-    height: 650px;
+    height: 662px;
   }
   .querydiv {
     height: 205px;
@@ -373,7 +373,7 @@
     max-height: 200px;
   }
   .leftoptions div {
-    height: 115px;
+    height: 117px;
     padding-top: 35px;
   }
   .__json-pretty-error__ {

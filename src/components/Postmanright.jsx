@@ -19,6 +19,7 @@ class Postmanright extends Component {
     index1: -1,
     querystr: this.props.querystr,
     highlight: this.props.highlight,
+    urlerr: this.props.urlerr,
   };
   componentDidMount = () => {
     let s1 = { ...this.state };
@@ -35,6 +36,7 @@ class Postmanright extends Component {
       }
       s1.allqueryparams = this.props.allqueryparams;
       s1.allheaders = this.props.allheaders;
+      s1.urlerr = this.props.urlerr;
       this.setState(s1);
     }
   };
@@ -79,9 +81,15 @@ class Postmanright extends Component {
     let s1 = { ...this.state };
     let AllData;
     let head = {};
-    // if (s1.data.url.substring(0, 1) !== "h") {
-    //   console.log(`${s1.data.url.substring(0, 1)}${s1.data.url}`);
-    // }
+    if (
+      s1.data.url.substring(0, 8) === "https://" ||
+      s1.data.url.substring(0, 7) === "http://"
+    ) {
+      s1.urlerr = "";
+    } else {
+      s1.urlerr = "Please give https:// or http:// before the url.";
+    }
+    console.log(s1.urlerr);
     for (let i = 0; i < s1.allheaders.length; i++) {
       if (s1.allheaders[i].key != "" || s1.allheaders[i].value != "") {
         head[s1.allheaders[i].key] = s1.allheaders[i].value;
@@ -102,10 +110,14 @@ class Postmanright extends Component {
         console.log(response.data);
         s1.alldata = response.data.data;
         s1.headers = response.data.headers;
-        if (response.data.data) {
-          s1.alldata = response.data.data;
+        if (s1.urlerr) {
+          s1.alldata = "";
         } else {
-          s1.alldata = response.data;
+          if (response.data.data) {
+            s1.alldata = response.data.data;
+          } else {
+            s1.alldata = response.data;
+          }
         }
         if (response.data.status) {
           s1.status = response.data.status;
@@ -129,10 +141,14 @@ class Postmanright extends Component {
       };
       let response = await http.post("/newdata", AllData);
       console.log(response.data);
-      if (response.data.data) {
-        s1.alldata = response.data.data;
+      if (s1.urlerr) {
+        s1.alldata = "";
       } else {
-        s1.alldata = response.data;
+        if (response.data.data) {
+          s1.alldata = response.data.data;
+        } else {
+          s1.alldata = response.data;
+        }
       }
       s1.headers = response.data.headers;
       console.log(s1.headers);
@@ -145,7 +161,7 @@ class Postmanright extends Component {
       }
     }
     this.setState(s1);
-    this.props.OnSend(s1.alldata, s1.headers, s1.data);
+    this.props.OnSend(s1.alldata, s1.headers, s1.data, s1.urlerr);
   }
   handlesendbtn = () => {
     let s1 = { ...this.state };
@@ -225,16 +241,21 @@ class Postmanright extends Component {
   };
   render() {
     let { url, method, postjson } = this.state.data;
-    let { alldata, status, headers, allqueryparams, allheaders, querystr } =
-      this.state;
+    let {
+      alldata,
+      status,
+      headers,
+      allqueryparams,
+      allheaders,
+      querystr,
+      urlerr,
+    } = this.state;
     let urllen = url + querystr;
     let headerKeys;
     let headervalues;
     if (this.props.headers && headers) {
       headerKeys = Object.keys(headers);
       headervalues = Object.values(headers);
-      console.log(headerKeys);
-      console.log(headervalues);
     }
     return (
       <div className="fullrightpannel">
@@ -266,7 +287,14 @@ class Postmanright extends Component {
               </button>
             </div>
           </div>
-          <div className="input-group p-2">
+          <div
+            className="input-group"
+            style={{
+              paddingLeft: "0.5rem",
+              paddingTop: "0.5rem",
+              paddingRight: "0.5rem",
+            }}
+          >
             <select
               className="form-select flex-grow-0 w-auto"
               name="method"
@@ -292,6 +320,9 @@ class Postmanright extends Component {
             >
               Send
             </button>
+          </div>
+          <div className="px-2" style={{ color: "red", height: "20px" }}>
+            {urlerr ? urlerr : ""}
           </div>
           <div>
             <div className="bodydata">
